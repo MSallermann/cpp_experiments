@@ -1,4 +1,6 @@
 #include "agents/run.hpp"
+#include "parse/run.hpp"
+
 #include <fmt/format.h>
 #include <fmt/ostream.h>
 #include <argparse/argparse.hpp>
@@ -6,6 +8,7 @@
 
 int main( int argc, char * argv[] )
 {
+
     argparse::ArgumentParser program( "cpp_experiments" );
 
     program.add_argument( "experiment" ).help( "The experiment to be run." );
@@ -22,10 +25,16 @@ int main( int argc, char * argv[] )
 
     auto experiment = program.get<std::string>( "experiment" );
 
-    if(experiment == "agents")
+    if( experiment == "agents" )
     {
         Agents::run();
-    } else {
-        throw std::runtime_error("Experiment string not known");
+    }
+    else if (experiment == "parse")
+    {
+        Parse::run();
+    }
+    else
+    {
+        throw std::runtime_error( "Experiment string not known" );
     }
 }
