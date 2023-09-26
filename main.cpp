@@ -1,5 +1,7 @@
 #include "agents/run.hpp"
 #include "parse/run.hpp"
+#include "reservoir_sampling/run.hpp"
+
 
 #include <fmt/format.h>
 #include <fmt/ostream.h>
@@ -32,6 +34,10 @@ int main( int argc, char * argv[] )
     else if (experiment == "parse")
     {
         Parse::run();
+    }
+    else if (experiment == "reservoir_sampling")
+    {
+        Reservoir_Sampling::run();
     }
     else
     {
