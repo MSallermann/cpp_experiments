@@ -91,6 +91,22 @@ namespace Tarjan
         adjacency_list.push_back(buffer); // E or 4
         buffer[0] = 4;
         adjacency_list.push_back(buffer); // F or 5
+        // // Second tree (G,H,I,J)
+        // buffer.resize(2);
+        // buffer[0] = 4;
+        // buffer[1] = 7;
+        // adjacency_list.push_back(buffer); // G or 6
+        // buffer[0] = 5;
+        // buffer[1] = 8;
+        // adjacency_list.push_back(buffer); // H or 7
+        // buffer.resize(1);
+        // buffer[0] = 9;
+        // adjacency_list.push_back(buffer); // I or 8
+        // buffer.resize(2);
+        // buffer[0] = 6;
+        // buffer[1] = 7;
+        // adjacency_list.push_back(buffer); // J or 9
+        fmt::print("Adjacency list:{}\n\n", adjacency_list);
         // --- 
 
         // ---
@@ -109,14 +125,25 @@ namespace Tarjan
         for (size_t i = 0; i < num_nodes; ++i)
         {
             num[i] = i;
+            lowest[i] = i;
         } 
-        // 
-        int v=0;
+        
+        // Tarjan's algorithm takes the form of a series of DFS invocations 
+        for (size_t i_node = 0; i_node < num_nodes; ++i_node)
+        {
+            // Start from a node that has not been visited 
+            if ( !visited[i_node] )
+            {   
+                // Call the depth first search
+                depth_first_search( adjacency_list, i_node, scc_list, num, lowest, visited, processed, stack);
+                        fmt::print("\n\nnum\n{}\n", num);
+        fmt::print("\n\nlowest\n{}\n", lowest);
+        fmt::print("\nstack\n{}\n", stack);
+            }
+        }
 
-        depth_first_search( adjacency_list, v, scc_list, num, lowest, visited, processed, stack);
-
-        // Test 
-        fmt::print( "List of SCC\n{}\n", scc_list );
+        // Test
+        fmt::print( "\n\nList of SCC\n{}\n", scc_list );
 
     } // end of run 
 }
