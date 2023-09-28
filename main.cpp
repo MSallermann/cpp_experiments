@@ -3,7 +3,6 @@
 #include "reservoir_sampling/run.hpp"
 #include "tarjan/run.hpp"
 
-
 #include <fmt/format.h>
 #include <fmt/ostream.h>
 #include <argparse/argparse.hpp>
@@ -32,15 +31,15 @@ int main( int argc, char * argv[] )
     {
         Agents::run();
     }
-    else if (experiment == "parse")
+    else if( experiment == "parse" )
     {
         Parse::run();
     }
-    else if (experiment == "reservoir_sampling")
+    else if( experiment == "reservoir_sampling" )
     {
         Reservoir_Sampling::run();
     }
-    else if (experiment == "tarjan")
+    else if( experiment == "tarjan" )
     {
         Tarjan::run();
     }
