@@ -29,7 +29,7 @@ namespace Tarjan
         {
             // If u hasn't been visited do a DFS
             if ( !visited[u] )
-            {
+            {   
                 // recursive call to DFS 
                 depth_first_search( adjacency_list, u, scc_list, num, lowest, visited, processed, stack, index_counter);
                 lowest[v] = std::min( lowest[v], lowest[u] );
@@ -121,7 +121,7 @@ namespace Tarjan
         buffer.resize(1);
         buffer[0] = 1;
         adjacency_list.push_back(buffer); // C or 2
-
+        fmt::print("Adjacency list:{}\n\n", adjacency_list);
         // ---
         // Initialize a bunch of things
         int num_nodes = adjacency_list.size();
