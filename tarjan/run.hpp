@@ -91,21 +91,21 @@ namespace Tarjan
         adjacency_list.push_back(buffer); // E or 4
         buffer[0] = 4;
         adjacency_list.push_back(buffer); // F or 5
-        // // Second tree (G,H,I,J)
-        // buffer.resize(2);
-        // buffer[0] = 4;
-        // buffer[1] = 7;
-        // adjacency_list.push_back(buffer); // G or 6
-        // buffer[0] = 5;
-        // buffer[1] = 8;
-        // adjacency_list.push_back(buffer); // H or 7
-        // buffer.resize(1);
-        // buffer[0] = 9;
-        // adjacency_list.push_back(buffer); // I or 8
-        // buffer.resize(2);
-        // buffer[0] = 6;
-        // buffer[1] = 7;
-        // adjacency_list.push_back(buffer); // J or 9
+        // Second tree (G,H,I,J)
+        buffer.resize(2);
+        buffer[0] = 4;
+        buffer[1] = 7;
+        adjacency_list.push_back(buffer); // G or 6
+        buffer[0] = 5;
+        buffer[1] = 8;
+        adjacency_list.push_back(buffer); // H or 7
+        buffer.resize(1);
+        buffer[0] = 9;
+        adjacency_list.push_back(buffer); // I or 8
+        buffer.resize(2);
+        buffer[0] = 6;
+        buffer[1] = 7;
+        adjacency_list.push_back(buffer); // J or 9
         fmt::print("Adjacency list:{}\n\n", adjacency_list);
         // --- 
 
@@ -125,7 +125,7 @@ namespace Tarjan
         for (size_t i = 0; i < num_nodes; ++i)
         {
             num[i] = i;
-            lowest[i] = i;
+            // lowest[i] = i; // Not needed 
         } 
         
         // Tarjan's algorithm takes the form of a series of DFS invocations 
@@ -136,9 +136,11 @@ namespace Tarjan
             {   
                 // Call the depth first search
                 depth_first_search( adjacency_list, i_node, scc_list, num, lowest, visited, processed, stack);
-                        fmt::print("\n\nnum\n{}\n", num);
+        fmt::print("\n\nnum\n{}\n", num);
         fmt::print("\n\nlowest\n{}\n", lowest);
         fmt::print("\nstack\n{}\n", stack);
+        fmt::print("\nvisited\n{}\n", visited);
+        fmt::print("\nprocessed\n{}\n", processed);
             }
         }
 
