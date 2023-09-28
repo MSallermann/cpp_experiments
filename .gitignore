@@ -38,3 +38,5 @@ pixi.lock
 *.exe
 *.out
 *.app
+
+.gdb_history
