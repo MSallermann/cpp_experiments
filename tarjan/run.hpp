@@ -78,39 +78,49 @@ namespace Tarjan
         // https://www.baeldung.com/cs/scc-tarjans-algorithm
         std::vector< std::vector<size_t> > adjacency_list;
         auto buffer = std::vector<size_t>();        // contains indices
-        // --- Create the list 
-        buffer.resize(1, 1);
+        // // --- Create the list 
+        // buffer.resize(1, 1);
+        // adjacency_list.push_back(buffer); // A or 0 
+        // buffer.resize(2);
+        // buffer[0] = 2;
+        // buffer[1] = 3;
+        // adjacency_list.push_back(buffer); // B or 1 
+        // buffer.resize(1);
+        // buffer[0] = 0;
+        // adjacency_list.push_back(buffer); // C or 2
+        // buffer[0] = 4;
+        // adjacency_list.push_back(buffer); // D or 3
+        // buffer[0] = 5; 
+        // adjacency_list.push_back(buffer); // E or 4
+        // buffer[0] = 4;
+        // adjacency_list.push_back(buffer); // F or 5
+        // // Second tree (G,H,I,J)
+        // buffer.resize(2);
+        // buffer[0] = 4;
+        // buffer[1] = 7;
+        // adjacency_list.push_back(buffer); // G or 6
+        // buffer[0] = 5;
+        // buffer[1] = 8;
+        // adjacency_list.push_back(buffer); // H or 7
+        // buffer.resize(1);
+        // buffer[0] = 9;
+        // adjacency_list.push_back(buffer); // I or 8
+        // buffer.resize(2);
+        // buffer[0] = 6;
+        // buffer[1] = 7;
+        // adjacency_list.push_back(buffer); // J or 9
+        // fmt::print("Adjacency list:{}\n\n", adjacency_list);
+        // --- 
+        // TEST
+        buffer.resize(1, 0);
         adjacency_list.push_back(buffer); // A or 0 
         buffer.resize(2);
-        buffer[0] = 2;
-        buffer[1] = 3;
+        buffer[0] = 0;
+        buffer[1] = 2;
         adjacency_list.push_back(buffer); // B or 1 
         buffer.resize(1);
-        buffer[0] = 0;
+        buffer[0] = 1;
         adjacency_list.push_back(buffer); // C or 2
-        buffer[0] = 4;
-        adjacency_list.push_back(buffer); // D or 3
-        buffer[0] = 5; 
-        adjacency_list.push_back(buffer); // E or 4
-        buffer[0] = 4;
-        adjacency_list.push_back(buffer); // F or 5
-        // Second tree (G,H,I,J)
-        buffer.resize(2);
-        buffer[0] = 4;
-        buffer[1] = 7;
-        adjacency_list.push_back(buffer); // G or 6
-        buffer[0] = 5;
-        buffer[1] = 8;
-        adjacency_list.push_back(buffer); // H or 7
-        buffer.resize(1);
-        buffer[0] = 9;
-        adjacency_list.push_back(buffer); // I or 8
-        buffer.resize(2);
-        buffer[0] = 6;
-        buffer[1] = 7;
-        adjacency_list.push_back(buffer); // J or 9
-        fmt::print("Adjacency list:{}\n\n", adjacency_list);
-        // --- 
 
         // ---
         // Initialize a bunch of things
