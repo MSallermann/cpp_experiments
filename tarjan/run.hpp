@@ -11,12 +11,15 @@ namespace Tarjan
     // We'll have the adjacency list in network
     // v: Current vertex 
     void depth_first_search( std::vector< std::vector<size_t> > & adjacency_list, std::size_t v, std::vector< std::vector<size_t> > & scc_list,
-    std::vector<size_t> & num, std::vector<size_t> & lowest, std::vector<bool> & visited, std::vector<bool> & processed, std::vector<size_t> & stack){ 
+    std::vector<size_t> & num, std::vector<size_t> & lowest, std::vector<bool> & visited, std::vector<bool> & processed, std::vector<size_t> & stack,
+    size_t & index_counter){ 
         int num_nodes = adjacency_list.size();
         std::vector<size_t> scc; 
 
         // Set things for the current vertex v
+        num[v] = index_counter;
         lowest[v] = num[v];
+        index_counter += 1;
         visited[v] = true; 
         stack.push_back(v);
 
@@ -28,7 +31,7 @@ namespace Tarjan
             if ( !visited[u] )
             {
                 // recursive call to DFS 
-                depth_first_search( adjacency_list, u, scc_list, num, lowest, visited, processed, stack);
+                depth_first_search( adjacency_list, u, scc_list, num, lowest, visited, processed, stack, index_counter);
                 lowest[v] = std::min( lowest[v], lowest[u] );
             } // u not visited
             else{
@@ -120,13 +123,7 @@ namespace Tarjan
         std::vector<bool> processed(num_nodes,false); // vertices which have been processed by DFS 
         std::vector<size_t> stack; // stack of vertices to keep a working set of vertices
         // holds all vertices reachable from the starting vertex
-
-        // Initialize num
-        for (size_t i = 0; i < num_nodes; ++i)
-        {
-            num[i] = i;
-            // lowest[i] = i; // Not needed 
-        } 
+        size_t index_counter = 0; // depth-first search node number counter
         
         // Tarjan's algorithm takes the form of a series of DFS invocations 
         for (size_t i_node = 0; i_node < num_nodes; ++i_node)
@@ -135,12 +132,12 @@ namespace Tarjan
             if ( !visited[i_node] )
             {   
                 // Call the depth first search
-                depth_first_search( adjacency_list, i_node, scc_list, num, lowest, visited, processed, stack);
-        fmt::print("\n\nnum\n{}\n", num);
-        fmt::print("\n\nlowest\n{}\n", lowest);
-        fmt::print("\nstack\n{}\n", stack);
-        fmt::print("\nvisited\n{}\n", visited);
-        fmt::print("\nprocessed\n{}\n", processed);
+                depth_first_search( adjacency_list, i_node, scc_list, num, lowest, visited, processed, stack,index_counter);
+                fmt::print("\n\nnum\n{}\n", num);
+                fmt::print("\n\nlowest\n{}\n", lowest);
+                fmt::print("\nstack\n{}\n", stack);
+                fmt::print("\nvisited\n{}\n", visited);
+                fmt::print("\nprocessed\n{}\n", processed);
             }
         }
 
