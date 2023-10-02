@@ -1,9 +1,6 @@
-#pragma once
 #include "models.hpp"
 
-namespace Agents
-{
-void run()
+int main()
 {
     std::unique_ptr<ModelBase> model = std::make_unique<ModelVector>( ModelVector() );
     auto var                         = model->get_agent( 0 )->to_string();
@@ -25,4 +22,3 @@ void run()
     var = model->get_agent( 1 )->to_string();
     std::cout << var << "\n";
 }
-} // namespace Agents

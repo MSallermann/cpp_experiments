@@ -1,8 +1,6 @@
 #pragma once
 #include "agents.hpp"
 
-namespace Agents
-{
 
 // The abstrac model interface
 class ModelBase
@@ -48,5 +46,3 @@ public:
         agents = std::vector<AgentT>{ AgentT( 0.0 ), AgentT( 1.0 ) };
     }
 };
-
-} // namespace Agents

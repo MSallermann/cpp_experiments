@@ -1,4 +1,5 @@
 #pragma once
+
 #include <fmt/format.h>
 #include <fmt/ostream.h>
 #include <fmt/ranges.h>
@@ -7,9 +8,6 @@
 #include <iostream>
 #include <memory>
 #include <vector>
-
-namespace Agents
-{
 
 // AGENTS
 /* Agent Base is the abstract interface, for every part of the code that is not the actual computation, IO etc. */
@@ -56,5 +54,3 @@ std::string Agent<TwoInt>::to_string() const
 {
     return fmt::format( "a = {}, b = {}", opinion.a, opinion.b );
 };
-
-} // namespace Agents

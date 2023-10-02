@@ -1,12 +1,8 @@
-#pragma once
 #include <fmt/format.h>
 #include <fmt/ranges.h>
 #include <array>
 #include <iterator>
 #include <vector>
-
-namespace Concepts
-{
 
 template<typename Container>
 requires std::contiguous_iterator<typename Container::iterator>
@@ -30,7 +26,7 @@ void bla( Container cont, bool probe )
     fmt::print( "Size in bytes {}, buffer {}\n", size_bytes, buffer );
 }
 
-void run()
+int main()
 {
     std::array<double, 5> arr;
     std::vector<float> vec( 10 );
@@ -40,5 +36,3 @@ void run()
 
     // std::vector<float>::iterator;
 }
-
-} // namespace Concepts

@@ -1,11 +1,8 @@
-#pragma once
 #include <fmt/format.h>
+#include <fmt/ranges.h>
 #include <optional>
 #include <tuple>
 #include <vector>
-
-namespace Tarjan
-{
 
 class TarjanConnectivityAlgo
 {
@@ -117,7 +114,7 @@ private:
 };
 
 // Run the test
-void run()
+int main()
 {
     // Create the vector of vectors containing the indices
     // Example from:
@@ -164,4 +161,3 @@ void run()
     fmt::print( "\n\nList of SCC\n{}\n", tarjan_scc.scc_list );
 
 } // end of run
-} // namespace Tarjan
