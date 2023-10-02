@@ -1,6 +1,7 @@
 #include "agents/run.hpp"
 #include "parse/run.hpp"
 #include "reservoir_sampling/run.hpp"
+#include "move_semantics/run.hpp"
 #include "tarjan/run.hpp"
 
 #include <fmt/format.h>
@@ -42,6 +43,10 @@ int main( int argc, char * argv[] )
     else if( experiment == "tarjan" )
     {
         Tarjan::run();
+    }
+    else if( experiment == "move_semantics" )
+    {
+        Move_Semantics::run();
     }
     else
     {

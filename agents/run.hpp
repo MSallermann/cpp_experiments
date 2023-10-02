@@ -1,3 +1,4 @@
+#pragma once
 #include "models.hpp"
 
 namespace Agents
