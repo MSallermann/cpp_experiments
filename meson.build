@@ -11,7 +11,7 @@ experiments = [
 'move_semantics', 
 'reservoir_sampling', 
 # 'tarjan',
-'parse',
+# 'parse',
 'ranges',
 ]
 
