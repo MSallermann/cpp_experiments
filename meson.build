@@ -6,7 +6,7 @@ project('cpp_experiments', 'cpp',
 # incdir = include_directories('.')
 
 experiments = [
-'agents',
+# 'agents',
 # 'concepts',
 'move_semantics', 
 'reservoir_sampling', 
