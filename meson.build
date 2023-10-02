@@ -7,10 +7,10 @@ project('cpp_experiments', 'cpp',
 
 experiments = [
 'agents',
-'concepts',
+# 'concepts',
 'move_semantics', 
 'reservoir_sampling', 
-'tarjan',
+# 'tarjan',
 'parse',
 'ranges',
 ]
