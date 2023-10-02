@@ -5,8 +5,7 @@
 #include <vector>
 
 template<typename Container>
-requires std::contiguous_iterator<typename Container::iterator>
-void bla( Container cont )
+requires std::contiguous_iterator<typename Container::iterator> void bla( Container cont )
 {
     auto a          = cont.begin();
     auto b          = cont.end();
@@ -16,8 +15,7 @@ void bla( Container cont )
 }
 
 template<typename Container>
-requires std::contiguous_iterator<typename Container::iterator> 
-void bla( Container cont, bool probe )
+requires std::contiguous_iterator<typename Container::iterator> void bla( Container cont, bool probe )
 {
     auto a          = cont.begin();
     auto b          = cont.end();

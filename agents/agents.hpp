@@ -50,7 +50,7 @@ struct TwoInt
     int b = 3;
 };
 template<>
-std::string Agent<TwoInt>::to_string() const
+inline std::string Agent<TwoInt>::to_string() const
 {
     return fmt::format( "a = {}, b = {}", opinion.a, opinion.b );
 };

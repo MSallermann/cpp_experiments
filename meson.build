@@ -19,6 +19,6 @@ foreach name : experiments
     exe = executable('@0@'.format(name), name + '/main.cpp',
         install : true,
         dependencies : [dependency('fmt')],
-        include_directories : 'common'
+        include_directories : [name, 'common']
     )
 endforeach

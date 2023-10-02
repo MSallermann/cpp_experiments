@@ -1,7 +1,6 @@
 #pragma once
 #include "agents.hpp"
 
-
 // The abstrac model interface
 class ModelBase
 {
@@ -17,9 +16,9 @@ class Model : public ModelBase
 public:
     using AgentT = AgentT_;
     std::vector<AgentT> agents;
-    Model( size_t n_agents )
+    Model( int n_agents )
     {
-        agents = std::vector<AgentT>{ int( n_agents ), AgentT() };
+        agents = std::vector<AgentT>( n_agents, AgentT() );
     }
 
     AgentBase * get_agent( int idx ) override // For this to work AgentT needs to be a subclass of AgentBase
