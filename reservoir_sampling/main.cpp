@@ -118,13 +118,6 @@ std::vector<size_t> reservoir_sampling_A_ExpJ( size_t n, size_t k, WeightCallbac
     }
 
     std::vector<size_t> result( H.size() );
-
-    for( int i = 0; i < k; i++ )
-    {
-        fmt::print( "{}: {}, {}\n", i, H.top().first, H.top().second );
-        result[i] = H.top().first;
-        H.pop();
-    }
     return result;
 }
 
@@ -203,22 +196,23 @@ void test_expJ()
     std::random_device rd = std::random_device();
     auto mt               = std::mt19937( rd() );
 
-    auto WeightFunc = []( size_t idx ) { return std::abs( n / 2.0 - idx ); };
+    // auto WeightFunc = []( size_t idx ) { return std::abs( n / 2.0 - idx ); };
+    auto WeightFunc = []( size_t idx ) { return std::sin(idx/100.0) + 1.0; };
 
-    const size_t n_tries = 10000;
+    const size_t n_tries = 100000;
 
     std::fstream output;
     output.open( "./output_a_expj.txt", std::fstream::in | std::fstream::out | std::fstream::trunc );
 
-    for( size_t i = 0; i < n_tries; i++ )
-    {
-        auto res = reservoir_sampling_A_ExpJ( 1000, 10, WeightFunc, mt );
-        for( const auto & i : res )
-        {
-            fmt::print( output, "{} ", i );
-        }
-        fmt::print( output, "\n" );
-    }
+    // for( size_t i = 0; i < n_tries; i++ )
+    // {
+    //     auto res = reservoir_sampling_A_ExpJ( 1000, 10, WeightFunc, mt );
+    //     for( const auto & i : res )
+    //     {
+    //         fmt::print( output, "{} ", i );
+    //     }
+    //     fmt::print( output, "\n" );
+    // }
 
     output.close();
 }

@@ -8,11 +8,11 @@ project('cpp_experiments', 'cpp',
 experiments = [
 # 'agents',
 # 'concepts',
-'move_semantics', 
+# 'move_semantics', 
 'reservoir_sampling', 
 # 'tarjan',
 # 'parse',
-'ranges',
+# 'ranges',
 ]
 
 foreach name : experiments
