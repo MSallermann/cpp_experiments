@@ -6,7 +6,9 @@
 #include <cstddef>
 #include <fstream>
 #include <iterator>
+#include <queue>
 #include <random>
+#include <utility>
 
 std::vector<size_t> reservoir_sample( size_t n, size_t k, std::mt19937 & mt )
 {
@@ -79,6 +81,53 @@ std::vector<size_t> reservoir_sample_std_iterator( size_t n, size_t k, std::mt19
     return reservoir;
 }
 
+template<typename WeightCallbackT>
+std::vector<size_t> reservoir_sampling_A_ExpJ( size_t n, size_t k, WeightCallbackT weight, std::mt19937 & mt )
+{
+    std::uniform_real_distribution<double> distribution( 0.0, 1.0 );
+
+    std::vector<size_t> reservoir( k );
+    using QueueItemT = std::pair<size_t, double>;
+
+    auto compare = []( const QueueItemT & item1, const QueueItemT & item2 ) { return item1.second > item2.second; };
+    std::priority_queue<QueueItemT, std::vector<QueueItemT>, decltype( compare )> H;
+
+    size_t idx = 0;
+    while( idx < n & H.size() < k )
+    {
+        double r = std::pow( distribution( mt ), 1.0 / weight( idx ) );
+        H.push( { idx, r } );
+        idx++;
+    }
+
+    auto X = std::log( distribution( mt ) ) / std::log( H.top().second );
+    while( idx < n )
+    {
+        auto w = weight( idx );
+        X -= w;
+        if( X <= 0 )
+        {
+            auto t                     = std::pow( H.top().second, w );
+            auto uniform_from_t_to_one = distribution( mt ) * ( 1.0 - t ) + t; // Random number in interval [t, 1.0]
+            auto r                     = std::pow( uniform_from_t_to_one, 1.0 / w );
+            H.pop();
+            H.push( { idx, r } );
+            X = std::log( distribution( mt ) ) / std::log( H.top().second );
+        }
+        idx++;
+    }
+
+    std::vector<size_t> result( H.size() );
+
+    for( int i = 0; i < k; i++ )
+    {
+        fmt::print( "{}: {}, {}\n", i, H.top().first, H.top().second );
+        result[i] = H.top().first;
+        H.pop();
+    }
+    return result;
+}
+
 template<typename func_t>
 size_t benchmark( func_t f, size_t times, size_t k, size_t n, std::mt19937 & mt )
 {
@@ -99,7 +148,7 @@ size_t benchmark( func_t f, size_t times, size_t k, size_t n, std::mt19937 & mt 
     return ms_int.count();
 }
 
-int main()
+void benchmark_draw_k_from_n()
 {
     std::random_device rd = std::random_device();
     auto mt               = std::mt19937( rd() );
@@ -144,5 +193,39 @@ int main()
     }
 
     output.close();
+}
+
+void test_expJ()
+{
+    const size_t n = 1000;
+    const size_t k = 10;
+
+    std::random_device rd = std::random_device();
+    auto mt               = std::mt19937( rd() );
+
+    auto WeightFunc = []( size_t idx ) { return std::abs( n / 2.0 - idx ); };
+
+    const size_t n_tries = 10000;
+
+    std::fstream output;
+    output.open( "./output_a_expj.txt", std::fstream::in | std::fstream::out | std::fstream::trunc );
+
+    for( size_t i = 0; i < n_tries; i++ )
+    {
+        auto res = reservoir_sampling_A_ExpJ( 1000, 10, WeightFunc, mt );
+        for( const auto & i : res )
+        {
+            fmt::print( output, "{} ", i );
+        }
+        fmt::print( output, "\n" );
+    }
+
+    output.close();
+}
+
+int main()
+{
+    // benchmark_draw_k_from_n();
+    test_expJ();
     return 0;
 }
